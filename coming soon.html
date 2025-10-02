@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    /* Pulse animation for Coming Soon text */
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.6;
+      }
+    }
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-gray-300 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center min-h-screen">
+
+  <div class="fade-in-up text-center p-6 sm:p-8 max-w-lg w-full mx-4 bg-white dark:bg-gray-800 glass-card rounded-xl shadow-lg">
+    
+    <!-- Coming Soon Title -->
+    <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 pulse">
+      🚀 Coming Soon
+    </h1>
+
+    <!-- Message -->
+    <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-8">
+      We’re working hard to bring you something amazing.<br/>
+      This page will be available very soon!
+    </p>
+
+    <!-- Countdown -->
+    <div id="countdown" class="flex justify-center gap-6 text-gray-900 dark:text-gray-100 mb-8 text-lg sm:text-xl font-semibold">
+      <div><span id="days">00</span><div class="text-xs">Days</div></div>
+      <div><span id="hours">00</span><div class="text-xs">Hours</div></div>
+      <div><span id="minutes">00</span><div class="text-xs">Minutes</div></div>
+      <div><span id="seconds">00</span><div class="text-xs">Seconds</div></div>
+    </div>
+
+    <!-- Button -->
+    <a
+      href="https://daraportfolio.vercel.app/portfolio"
+      class="px-6 py-3 bg-blue-500 text-white rounded-full text-sm sm:text-base font-medium transition-colors flex items-center justify-center gap-2 mx-auto hover:bg-gray-300 hover:text-gray-700"
+    >
+      Back to Portfolio
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+    </a>
+  </div>
+
+  <!-- Countdown Script -->
+  <script>
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 10); // Example: 10 days from now
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "We are live! 🎉";
+      }
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+
+</body>
+</html>
